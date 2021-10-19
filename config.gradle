@@ -1,0 +1,48 @@
+/**
+ * 在主项目的根目录下创建config.gradle文件
+ * 在这里单独处理统一依赖问题
+ * 注意需要在根目录的build.gradle中进行引入
+ */
+
+ext{
+
+
+    //false:作为Lib组件存在；true:作为application存在
+    isApplication = false
+    //基础框架使用介绍
+    isSimpleApplication = true
+    //玩Android主模块
+    isAndroidApplication = false
+
+    android = [
+            //编译的SDK版本
+            /**
+             * M 6.0 适配运行时权限  - 动态权限已处理
+             * N 7.0 适配文件，禁止你的应用公开file
+             * O 8.0 适配通知 - 通知适配以做到；APK安装需要加入额外的权限
+             */
+            compileSdkVersion: 30,
+            //编译的Tools版本
+            buildToolsVersion: "30.0.3",
+            //项目id
+            applicationId    :"com.cs.lu",
+            //支持SDK的最低版本
+            minSdkVersion    : 16,
+            //支持SDK的目标版本
+            targetSdkVersion : 30,
+            //版本号
+            versionCode      : 1,
+            //版本名称
+            versionName      : "1.0",
+
+            testInstrumentationRunner:"android.support.test.runner.AndroidJUnitRunner"
+    ]
+
+    dependencies = [
+
+            //阿里路由依赖 https://github.com/alibaba/ARouter
+            "arouter_api"        : 'com.alibaba:arouter-api:1.5.1',
+            "arouter_compiler"   : 'com.alibaba:arouter-compiler:1.5.1',
+
+    ]
+}

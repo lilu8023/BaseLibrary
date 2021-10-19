@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_FFFFFF"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/status_error_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5"/>
+
+    <ImageView
+        android:id="@+id/status_error_iv"
+        android:layout_width="@dimen/dp_100"
+        android:layout_height="@dimen/dp_100"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/status_error_line"
+        android:layout_marginBottom="@dimen/dp_15"
+        android:background="@color/color_FF5C50"/>
+
+    <TextView
+        android:id="@+id/status_error_tv"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/status_error_line"
+        android:layout_marginTop="@dimen/dp_15"
+        android:layout_marginStart="@dimen/dp_15"
+        android:layout_marginEnd="@dimen/dp_15"
+        android:gravity="center"
+        android:text="@string/status_error" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/status_error_bt"
+        android:layout_width="@dimen/dp_100"
+        android:layout_height="@dimen/dp_40"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/status_error_tv"
+        android:layout_marginTop="@dimen/dp_15"
+        android:layout_marginStart="@dimen/dp_15"
+        android:layout_marginEnd="@dimen/dp_15"
+        android:text="@string/status_bt_error"
+        android:gravity="center"
+        app:bl_corners_radius="@dimen/dp_20"
+        app:bl_pressed_drawable="@color/color_888888"
+        app:bl_unPressed_drawable="@color/color_BBBBBB"
+        app:bl_pressed_textColor="@color/color_FF5C50"
+        app:bl_unPressed_textColor="@color/color_222222"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

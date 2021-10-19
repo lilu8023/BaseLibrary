@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!---->
+    <color name="color_FF666666">#FF666666</color>
+    <color name="color_FFE94339">#FFE94339</color>
+
+    <color name="color_000000">#000000</color>
+    <color name="color_FFFFFF">#FFFFFF</color>
+    <color name="color_D8D8D8">#D8D8D8</color>
+    <color name="color_222222">#222222</color>
+    <color name="color_FFFEEE">#FFFEEE</color>
+    <color name="color_888888">#888888</color>
+    <color name="color_BBBBBB">#BBBBBB</color>
+    <color name="color_EEEEEE">#EEEEEE</color>
+    <color name="color_FF6123">#FF6123</color>
+    <color name="color_F6F6F6">#F6F6F6</color>
+    <color name="color_898A8C">#898A8C</color>
+    <color name="color_FF5C50">#FF5C50</color>
+    <color name="color_333333">#333333</color>
+    <color name="color_999999">#999999</color>
+    <color name="color_E6E6E6">#E6E6E6</color>
+    <color name="color_F43A2C">#F43A2C</color>
+    <color name="color_ED6433">#ED6433</color>
+    <color name="color_F6F7F9">#F6F7F9</color>
+    <color name="color_CFCFCF">#CFCFCF</color>
+    <color name="color_7E94FE">#7E94FE</color>
+    <color name="color_FF4D18">#FF4D18</color>
+    <color name="color_FF9518">#FF9518</color>
+    <color name="color_398DEF">#398DEF</color>
+    <color name="color_1EAD36">#1EAD36</color>
+    <color name="color_FF4C23">#FF4C23</color>
+
+</resources>

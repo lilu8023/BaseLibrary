@@ -1,0 +1,6 @@
+include ':module-main'
+include ':module-simple'
+include ':lib-appthird'
+include ':lib-appcommon'
+include ':app'
+rootProject.name = "BaseLibrary"

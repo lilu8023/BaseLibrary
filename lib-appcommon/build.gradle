@@ -1,0 +1,101 @@
+apply plugin: 'com.android.library'
+
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion rootProject.ext.android["compileSdkVersion"]
+    buildToolsVersion rootProject.ext.android["buildToolsVersion"]
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.android["minSdkVersion"]
+        targetSdkVersion rootProject.ext.android["targetSdkVersion"]
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    //阿里路由注解
+    kapt {
+        arguments {
+            arg("AROUTER_MODULE_NAME", project.getName())
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+            //用于控制一些开关，如日志打印
+            buildConfigField ("boolean", "IS_DEBUG", "false")
+        }
+        debug{
+            //用于控制一些开关，如日志打印
+            buildConfigField ("boolean", "IS_DEBUG", "true")
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    api 'androidx.appcompat:appcompat:1.2.0'
+    api 'androidx.constraintlayout:constraintlayout:2.1.0-alpha1'
+
+    implementation 'com.android.support:multidex:1.0.3'
+
+    //下拉刷新  https://github.com/scwang90/SmartRefreshLayout
+    api 'com.scwang.smart:refresh-layout-kernel:2.0.3'
+    api 'com.scwang.smart:refresh-header-classics:2.0.3'
+    api 'com.scwang.smart:refresh-footer-classics:2.0.3'
+
+    //强大而灵活的RecyclerView Adapter https://github.com/CymChad/BaseRecyclerViewAdapterHelper
+    api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4'
+
+    //rxjava  配合retrofit2
+    api 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    api 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
+    //retrofit2依赖
+    api 'com.squareup.retrofit2:retrofit:2.9.0'
+    //retrofit2只支持将http转换成responseBody.为retrofit2添加GSON转换器
+    api 'com.squareup.retrofit2:converter-gson:2.5.0'
+
+    //轮播图框架 https://github.com/youth5201314/banner
+    api 'com.youth.banner:banner:2.1.0'
+
+    //包含viewpager2
+    api "com.google.android.material:material:1.1.0"
+
+    //日志打印工具  https://github.com/orhanobut/logger
+    api 'com.orhanobut:logger:2.2.0'
+
+    // 权限请求框架：https://github.com/getActivity/XXPermissions
+    implementation 'com.github.getActivity:XXPermissions:11.0'
+
+    //图片加载框架 https://github.com/bumptech/glide
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
+    kapt  'com.github.bumptech.glide:compiler:4.12.0'
+
+    //阿里路由框架 https://github.com/alibaba/ARouter/blob/master/README_CN.md
+    api 'com.alibaba:arouter-api:1.5.1'
+    kapt 'com.alibaba:arouter-compiler:1.5.1'
+
+    // 状态栏沉浸式 https://github.com/gyf-dev/ImmersionBar
+    // 基础依赖包，必须要依赖
+    implementation 'com.gyf.immersionbar:immersionbar:3.0.0'
+
+    //  https://github.com/JavaNoober/BackgroundLibrary
+    api 'com.github.JavaNoober.BackgroundLibrary:library:1.6.9'
+}

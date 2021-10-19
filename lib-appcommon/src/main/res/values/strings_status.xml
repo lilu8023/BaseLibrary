@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="status_empty">暂无内容</string>
+    <string name="status_error">出错了</string>
+    <string name="status_bt_error">再试一次</string>
+
+
+</resources>

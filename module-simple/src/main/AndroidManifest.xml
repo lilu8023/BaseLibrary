@@ -1,0 +1,9 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.lilu.simple">
+
+    <application>
+
+        <activity android:name=".state.StateActivity"/>
+
+    </application>
+</manifest>
