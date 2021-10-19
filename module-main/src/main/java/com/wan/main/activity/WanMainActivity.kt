@@ -4,14 +4,13 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
 import androidx.viewpager2.widget.ViewPager2
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.lilu.appcommon.activity.BaseActivity
 import com.lilu.appcommon.adapter.ViewPagerAdapter
 import com.lilu.appcommon.widget.jptabbar.JPTabBar
 import com.lilu.appcommon.widget.jptabbar.bean.TabBean
-import com.lilu.apptool.update.Update
-import com.orhanobut.logger.Logger
+import com.lilu.apptool.router.RouterPath
 import com.wan.main.R
-import com.wan.main.fragment.AnimationFragment
 import com.wan.main.fragment.WanMainFragment
 
 
@@ -21,6 +20,7 @@ import com.wan.main.fragment.WanMainFragment
  * @author lilu0916 on 2021/6/11
  *  No one knows this better than me
  */
+@Route(path = RouterPath.ACTIVITY_MAIN)
 class WanMainActivity : BaseActivity() {
 
     private lateinit var vpWan:ViewPager2
@@ -48,7 +48,7 @@ class WanMainActivity : BaseActivity() {
         vpList = ArrayList()
         vpList.apply {
             add(WanMainFragment())
-            add(AnimationFragment())
+            add(WanMainFragment())
             add(WanMainFragment())
             add(WanMainFragment())
         }

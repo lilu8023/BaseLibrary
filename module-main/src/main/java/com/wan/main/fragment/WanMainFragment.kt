@@ -6,32 +6,32 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.lilu.appcommon.fragment.BaseFragment
 import com.lilu.appcommon.widget.recyclerview.SpacesItemDecoration
 import com.lilu.apptool.imageloader.ImageLoader
 import com.lilu.apptool.livedata.LiveStatus
+import com.lilu.apptool.router.RouterPath
 import com.wan.main.R
-import com.wan.main.adapter.WanBannerAdapter
 import com.wan.main.adapter.WanMainAdapter
 import com.wan.main.databinding.FragmentWanBinding
 import com.wan.main.entity.BannerEntity
 import com.wan.main.entity.WanMainEntity
 import com.wan.main.model.MainModel
+import com.youth.banner.Banner
 import com.youth.banner.adapter.BannerImageAdapter
 import com.youth.banner.holder.BannerImageHolder
-import com.youth.banner.listener.OnBannerListener
-import io.reactivex.Observable
-import io.reactivex.Observer
-import io.reactivex.disposables.Disposable
-import java.util.concurrent.TimeUnit
 
 /**
  * Description:
+ * 首页的fragment
  * @author lilu0916 on 2021/6/11
  *  No one knows this better than me
  */
+@Route(path = RouterPath.FRAGMENT_MAIN)
 class WanMainFragment : BaseFragment() {
 
+    lateinit var bannerHeadView:View
     //轮播图适配器
     private var bannerAdapter:BannerImageAdapter<BannerEntity> ?= null
     //轮播图数据
@@ -47,22 +47,6 @@ class WanMainFragment : BaseFragment() {
 
     override fun onVisibleFirst() {
 
-        Observable.timer(3,TimeUnit.SECONDS)
-                .subscribe(object : Observer<Long>{
-                    override fun onSubscribe(d: Disposable) {
-                    }
-
-                    override fun onNext(t: Long) {
-                    }
-
-                    override fun onError(e: Throwable) {
-                    }
-
-                    override fun onComplete() {
-                        showSuccess()
-                    }
-                })
-
         mainVm.getMainBanner()
 
         mainVm.getMainArticle()
@@ -74,6 +58,8 @@ class WanMainFragment : BaseFragment() {
 
     override fun init(rootView: View) {
         wanBinding = DataBindingUtil.bind(rootView)!!
+
+        bannerHeadView = layoutInflater.inflate(R.layout.layout_main_head,null)
 
         mainVm = ViewModelProvider(this,ViewModelProvider.NewInstanceFactory()).get(MainModel::class.java)
 
@@ -94,12 +80,9 @@ class WanMainFragment : BaseFragment() {
                     ImageLoader.getInstance()
                             .displayImage(activity, bannerList[position].imagePath, it.imageView)
                 }
-
-
             }
-
         }
-        wanBinding.bannerFraWan.apply {
+        bannerHeadView.findViewById<Banner<*,*>>(R.id.banner_fra_wan).apply {
 
             adapter = bannerAdapter
 
@@ -128,6 +111,7 @@ class WanMainFragment : BaseFragment() {
      */
     private fun initArticle(){
         wanAdapter = WanMainAdapter(wanList)
+        wanAdapter.addHeaderView(bannerHeadView)
 
         wanBinding.rvFraWan.let {
             it.addItemDecoration(SpacesItemDecoration(activity))

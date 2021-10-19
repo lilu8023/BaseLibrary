@@ -27,7 +27,7 @@ ext{
             //项目id
             applicationId    :"com.cs.lu",
             //支持SDK的最低版本
-            minSdkVersion    : 16,
+            minSdkVersion    : 19,
             //支持SDK的目标版本
             targetSdkVersion : 30,
             //版本号

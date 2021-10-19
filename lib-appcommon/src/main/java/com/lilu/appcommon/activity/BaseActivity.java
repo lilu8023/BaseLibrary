@@ -131,8 +131,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IStatus 
     protected void initStatus(){
         ImmersionBar.with(this)
                 .fitsSystemWindows(true)
-                .statusBarDarkFont(true)
-//                .statusBarColor(R.color.color_398DEF)
+                .statusBarColor(R.color.color_398DEF)
                 .init();
     }
 
