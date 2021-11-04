@@ -139,7 +139,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IStatus 
      * 初始化标题栏
      */
     protected void initToolbar(Toolbar toolbar){
-        setSupportActionBar(tbBase);
+        setSupportActionBar(toolbar);
         if(getSupportActionBar() != null){
             getSupportActionBar().setDisplayShowTitleEnabled(false);
         }

@@ -9,6 +9,7 @@ import com.lilu.apptool.router.Router
 import com.lilu.apptool.router.RouterPath
 import com.wan.main.R
 import com.wan.main.databinding.ActivitySplashBinding
+import com.wan.main.router.MainRouterPath
 import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -32,10 +33,14 @@ class SplashActivity : AppCompatActivity() {
 
         mBinding = DataBindingUtil.setContentView(this,R.layout.activity_splash)
 
+        Router.getInstance().startActivity(RouterPath.ACTIVITY_MAIN)
+//        Router.getInstance().startActivity(MainRouterPath.ACTIVITY_TOOL)
+        finish()
+
         /**
          * 启动三秒倒计时
          */
-        Observable.intervalRange(0,4, 1,1,TimeUnit.SECONDS)
+        /*Observable.intervalRange(0,4, 1,1,TimeUnit.SECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : Observer<Long> {
                     override fun onSubscribe(d: Disposable) {
@@ -55,7 +60,7 @@ class SplashActivity : AppCompatActivity() {
                         Router.getInstance().startActivity(RouterPath.ACTIVITY_MAIN)
                         finish()
                     }
-                })
+                })*/
     }
 
 

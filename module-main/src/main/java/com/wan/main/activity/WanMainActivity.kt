@@ -12,6 +12,11 @@ import com.lilu.appcommon.widget.jptabbar.bean.TabBean
 import com.lilu.apptool.router.RouterPath
 import com.wan.main.R
 import com.wan.main.fragment.WanMainFragment
+import io.reactivex.Observable
+import io.reactivex.Observer
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
+import java.util.concurrent.TimeUnit
 
 
 /**
@@ -41,7 +46,6 @@ class WanMainActivity : BaseActivity() {
     override fun init(savedInstanceState: Bundle?) {
         //首页不显示toolbar
         showToolbar(false)
-
         vpWan = findViewById(R.id.vp_wan)
         tab_wan = findViewById(R.id.tab_wan)
 
@@ -124,7 +128,6 @@ class WanMainActivity : BaseActivity() {
             setupWithViewPager(vpWan)
             showBadge(1, "3")
         }
-
-
+        
     }
 }

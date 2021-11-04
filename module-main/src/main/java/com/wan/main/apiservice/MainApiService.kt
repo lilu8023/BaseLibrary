@@ -1,12 +1,8 @@
 package com.wan.main.apiservice
 
 import com.lilu.apptool.http.entity.BaseEntity
-import com.wan.main.entity.BannerEntity
-import com.wan.main.entity.VersionEntity
-import com.wan.main.entity.WanMainEntity
+import com.wan.main.entity.*
 import io.reactivex.Observable
-import okhttp3.ResponseBody
-import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
 
@@ -18,9 +14,27 @@ import retrofit2.http.Path
 interface MainApiService {
 
 
+    /**
+     * 首页 - 获取轮播图
+     */
     @GET("/banner/json")
     fun getBanner() : Observable<BaseEntity<MutableList<BannerEntity>>>
 
+    /**
+     * 首页 - 获取常用工具
+     */
+    @GET("/friend/json")
+    fun getTool():Observable<ToolEntity>
+
+    /**
+     * 首页 - 获取置顶文章列表
+     */
+    @GET("/article/top/json")
+    fun getTopArticle():Observable<TopEntity>
+
+    /**
+     * 首页 - 获取文章列表
+     */
     @GET("/article/list/{pageNum}/json")
     fun getArticle(@Path("pageNum")pageNum:Int):Observable<BaseEntity<WanMainEntity>>
 

@@ -14,5 +14,6 @@
 
         <activity android:name=".activity.WanMainActivity"/>
 
+        <activity android:name=".tool.activity.ToolActivity"/>
     </application>
 </manifest>

@@ -4,20 +4,31 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.chad.library.adapter.base.BaseQuickAdapter
+import com.chad.library.adapter.base.listener.OnItemClickListener
 import com.lilu.appcommon.fragment.BaseFragment
+import com.lilu.appcommon.widget.recyclerview.GridSpaceItemDecoration
 import com.lilu.appcommon.widget.recyclerview.SpacesItemDecoration
 import com.lilu.apptool.imageloader.ImageLoader
+import com.lilu.apptool.livedata.CustomLiveData
 import com.lilu.apptool.livedata.LiveStatus
+import com.lilu.apptool.router.Router
 import com.lilu.apptool.router.RouterPath
 import com.wan.main.R
 import com.wan.main.adapter.WanMainAdapter
+import com.wan.main.adapter.WanToolAdapter
 import com.wan.main.databinding.FragmentWanBinding
 import com.wan.main.entity.BannerEntity
+import com.wan.main.entity.ToolEntity
 import com.wan.main.entity.WanMainEntity
 import com.wan.main.model.MainModel
+import com.wan.main.router.MainRouterPath
 import com.youth.banner.Banner
 import com.youth.banner.adapter.BannerImageAdapter
 import com.youth.banner.holder.BannerImageHolder
@@ -36,6 +47,11 @@ class WanMainFragment : BaseFragment() {
     private var bannerAdapter:BannerImageAdapter<BannerEntity> ?= null
     //轮播图数据
     private var bannerList = ArrayList<BannerEntity>()
+
+    lateinit var toolView:View
+    private lateinit var toolAdapter:WanToolAdapter
+    private var toolList= ArrayList<ToolEntity.ToolChild>()
+
     //首页文章列表适配器
     private lateinit var wanAdapter : WanMainAdapter
     //首页文章数据
@@ -47,7 +63,12 @@ class WanMainFragment : BaseFragment() {
 
     override fun onVisibleFirst() {
 
+        showSuccess()
         mainVm.getMainBanner()
+
+        mainVm.getMainTool()
+
+        mainVm.getMainTopArticle()
 
         mainVm.getMainArticle()
     }
@@ -61,9 +82,30 @@ class WanMainFragment : BaseFragment() {
 
         bannerHeadView = layoutInflater.inflate(R.layout.layout_main_head,null)
 
+        toolView = layoutInflater.inflate(R.layout.layout_main_tools,null)
+
         mainVm = ViewModelProvider(this,ViewModelProvider.NewInstanceFactory()).get(MainModel::class.java)
 
+        wanAdapter = WanMainAdapter(wanList)
+        wanAdapter.addHeaderView(bannerHeadView)
+        wanAdapter.addHeaderView(toolView)
+
+        wanBinding.rvFraWan.let {
+            it.addItemDecoration(SpacesItemDecoration(activity))
+            it.layoutManager = LinearLayoutManager(activity)
+            it.adapter = wanAdapter
+        }
+
+        wanAdapter.setOnItemClickListener { _, _, position ->
+
+            run {
+                Toast.makeText(activity, "点击了${wanList[position].title}", Toast.LENGTH_SHORT).show()
+            }
+
+        }
         initBanner()
+
+        initTool()
 
         initArticle()
 
@@ -73,7 +115,6 @@ class WanMainFragment : BaseFragment() {
      * 初始化轮播图
      */
     private fun initBanner(){
-//        bannerAdapter = WanBannerAdapter(bannerList)
         bannerAdapter = object : BannerImageAdapter<BannerEntity>(bannerList) {
             override fun onBindView(holder: BannerImageHolder?, data: BannerEntity?, position: Int, size: Int) {
                 holder?.let {
@@ -106,18 +147,45 @@ class WanMainFragment : BaseFragment() {
 
     }
 
+    private fun initTool(){
+        toolAdapter = WanToolAdapter(toolList)
+
+        var toolRv = toolView.findViewById<RecyclerView>(R.id.rv_main_tools)
+        toolRv?.let {
+            it.addItemDecoration(GridSpaceItemDecoration(5))
+            it.layoutManager = GridLayoutManager(activity,4)
+            it.adapter = toolAdapter
+        }
+
+        mainVm.toolList.observe(this,{
+            if (it.status == LiveStatus.SUCCESS){
+                toolList.clear()
+                toolList.addAll(it.data)
+                toolAdapter.notifyDataSetChanged()
+            }
+        })
+
+        toolAdapter.setOnItemClickListener { _, _, position ->
+            if (position != 7) {
+                //直接跳转到相应的工具页
+                Toast.makeText(activity, "点击了${toolList[position].name}", Toast.LENGTH_SHORT).show()
+            } else {
+                //点击了更多，打开更多工具页
+                Router.getInstance().startActivity(MainRouterPath.ACTIVITY_TOOL)
+            }
+        }
+    }
     /**
      * 初始化首页文章列表
      */
     private fun initArticle(){
-        wanAdapter = WanMainAdapter(wanList)
-        wanAdapter.addHeaderView(bannerHeadView)
 
-        wanBinding.rvFraWan.let {
-            it.addItemDecoration(SpacesItemDecoration(activity))
-            it.layoutManager = LinearLayoutManager(activity)
-            it.adapter = wanAdapter
-        }
+        mainVm.topArticleList.observe(this, { t ->
+            t?.let {
+                wanList.addAll(0,it.data)
+                wanAdapter.notifyDataSetChanged()
+            }
+        })
 
         mainVm.articleList.observe(this, { t ->
             t?.let {
