@@ -13,13 +13,8 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.gyf.immersionbar.ImmersionBar;
 import com.lilu.appcommon.R;
-import com.lilu.appcommon.widget.statuslayout.IStatus;
-import com.lilu.appcommon.widget.statuslayout.callback.EmptyCallback;
-import com.lilu.appcommon.widget.statuslayout.callback.ErrorCallback;
-import com.lilu.appcommon.widget.statuslayout.callback.LoadingCallback;
-import com.lilu.appcommon.widget.statuslayout.callback.SuccessCallback;
-import com.lilu.appcommon.widget.statuslayout.core.LoadService;
-import com.lilu.appcommon.widget.statuslayout.core.LoadSir;
+import com.lilu.appcommon.widget.statuslayout.UiStatusController;
+import com.lilu.appcommon.widget.statuslayout.annotation.UiStatus;
 import com.lilu.apptool.utils.StringUtils;
 import com.noober.background.BackgroundLibrary;
 
@@ -32,7 +27,7 @@ import com.noober.background.BackgroundLibrary;
  * @author lilu0916 on 2021/4/15 14:34
  * No one knows this better than me
  */
-public abstract class BaseActivity extends AppCompatActivity implements IStatus {
+public abstract class BaseActivity extends AppCompatActivity{
 
     /**
      * 子类布局
@@ -57,7 +52,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IStatus 
     /**
      * 状态布局管理器
      */
-    private LoadService statusLayout;
+    private UiStatusController statusController;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -87,7 +82,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IStatus 
             FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT);
             flBase.addView(contentView,params);
 
-            statusLayout = LoadSir.getDefault().register(flBase);
+            statusController = UiStatusController.get().bind(flBase);
         }
 
         //子类初始化
@@ -166,43 +161,39 @@ public abstract class BaseActivity extends AppCompatActivity implements IStatus 
     /**
      * 显示成功状态
      */
-    @Override
     public void showSuccess(){
-        if(statusLayout != null){
-            statusLayout.showCallback(SuccessCallback.class);
+
+        if(statusController != null){
+            statusController.changeUiStatus(UiStatus.CONTENT);
         }
     }
 
     /**
      * 显示加载中状态
      */
-    @Override
     public void showLoading(){
 
-        if(statusLayout != null){
-            statusLayout.showCallback(LoadingCallback.class);
+        if(statusController != null){
+            statusController.changeUiStatus(UiStatus.LOADING);
         }
     }
 
     /**
      * 显示空，暂无内容状态
      */
-    @Override
     public void showEmpty(){
         showEmpty("");
     }
 
-    @Override
     public void showEmpty(String emptyMsg) {
-        if(statusLayout != null){
-            statusLayout.showCallback(EmptyCallback.class);
+        if(statusController != null){
+            statusController.changeUiStatus(UiStatus.EMPTY);
         }
     }
 
     /**
      * 显示默认错误状态
      */
-    @Override
     public void showError() {
         showError("默认的错误",null);
     }
@@ -212,22 +203,10 @@ public abstract class BaseActivity extends AppCompatActivity implements IStatus 
      * @param errorMsg  错误信息
      * @param listener  错误点击事件
      */
-    @Override
     public void showError(String errorMsg, View.OnClickListener listener) {
-        if(statusLayout != null){
-            //动态修改错误状态的内容
-            statusLayout.setCallBack(ErrorCallback.class, (context, view) -> {
-                if(!StringUtils.isEmpty(errorMsg)){
-                    TextView textView = view.findViewById(R.id.status_error_tv);
-                    textView.setText(errorMsg);
-                }
 
-                if(listener != null){
-                    view.findViewById(R.id.status_error_bt).setOnClickListener(listener);
-                }
-
-            });
-            statusLayout.showCallback(ErrorCallback.class);
+        if(statusController != null){
+            statusController.changeUiStatus(UiStatus.LOAD_ERROR);
         }
     }
 }

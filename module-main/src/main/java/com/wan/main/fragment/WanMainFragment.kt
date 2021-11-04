@@ -63,7 +63,6 @@ class WanMainFragment : BaseFragment() {
 
     override fun onVisibleFirst() {
 
-        showSuccess()
         mainVm.getMainBanner()
 
         mainVm.getMainTool()
@@ -184,6 +183,8 @@ class WanMainFragment : BaseFragment() {
             t?.let {
                 wanList.addAll(0,it.data)
                 wanAdapter.notifyDataSetChanged()
+
+                showSuccess()
             }
         })
 

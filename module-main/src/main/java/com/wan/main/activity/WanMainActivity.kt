@@ -128,6 +128,7 @@ class WanMainActivity : BaseActivity() {
             setupWithViewPager(vpWan)
             showBadge(1, "3")
         }
-        
+
+        showSuccess()
     }
 }

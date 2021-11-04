@@ -5,22 +5,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.lilu.appcommon.R;
-import com.lilu.appcommon.widget.statuslayout.IStatus;
-import com.lilu.appcommon.widget.statuslayout.callback.EmptyCallback;
-import com.lilu.appcommon.widget.statuslayout.callback.ErrorCallback;
-import com.lilu.appcommon.widget.statuslayout.callback.LoadingCallback;
-import com.lilu.appcommon.widget.statuslayout.callback.SuccessCallback;
-import com.lilu.appcommon.widget.statuslayout.core.LoadService;
-import com.lilu.appcommon.widget.statuslayout.core.LoadSir;
-import com.lilu.apptool.utils.StringUtils;
+import com.lilu.appcommon.widget.statuslayout.UiStatusController;
+import com.lilu.appcommon.widget.statuslayout.annotation.UiStatus;
 
 import java.util.List;
 
@@ -30,7 +22,7 @@ import java.util.List;
  * @author lilu0916 on 2021/4/15 14:34
  * No one knows this better than me
  */
-public abstract class BaseFragment extends Fragment implements IFragmentVisibility, IStatus {
+public abstract class BaseFragment extends Fragment implements IFragmentVisibility{
 
     // Fragment当前是否对用户可见。
     private boolean mIsFragmentVisible = false;
@@ -44,7 +36,7 @@ public abstract class BaseFragment extends Fragment implements IFragmentVisibili
 
     protected View rootView;
 
-    private LoadService statusLayout;
+    private UiStatusController statusController;
 
     @Nullable
     @Override
@@ -54,10 +46,10 @@ public abstract class BaseFragment extends Fragment implements IFragmentVisibili
             rootView = inflater.inflate(getRootView(),container,false);
         }
 
-        statusLayout = LoadSir.getDefault().register(rootView);
+        statusController = UiStatusController.get();
         init(rootView);
 
-        return statusLayout.getLoadLayout();
+        return statusController.bindFragment(rootView);
     }
 
     @Override
@@ -166,43 +158,38 @@ public abstract class BaseFragment extends Fragment implements IFragmentVisibili
     /**
      * 显示成功状态
      */
-    @Override
     public void showSuccess(){
-        if(statusLayout != null){
-            statusLayout.showCallback(SuccessCallback.class);
+        if(statusController != null){
+            statusController.changeUiStatus(UiStatus.CONTENT);
         }
     }
 
     /**
      * 显示加载中状态
      */
-    @Override
     public void showLoading(){
 
-        if(statusLayout != null){
-            statusLayout.showCallback(LoadingCallback.class);
+        if(statusController != null){
+            statusController.changeUiStatus(UiStatus.LOADING);
         }
     }
 
     /**
      * 显示空，暂无内容状态
      */
-    @Override
     public void showEmpty(){
         showEmpty("");
     }
 
-    @Override
     public void showEmpty(String emptyMsg) {
-        if(statusLayout != null){
-            statusLayout.showCallback(EmptyCallback.class);
+        if(statusController != null){
+            statusController.changeUiStatus(UiStatus.EMPTY);
         }
     }
 
     /**
      * 显示默认错误状态
      */
-    @Override
     public void showError() {
         showError("默认的错误",null);
     }
@@ -212,22 +199,9 @@ public abstract class BaseFragment extends Fragment implements IFragmentVisibili
      * @param errorMsg  错误信息
      * @param listener  错误点击事件
      */
-    @Override
     public void showError(String errorMsg, View.OnClickListener listener) {
-        if(statusLayout != null){
-            //动态修改错误状态的内容
-            statusLayout.setCallBack(ErrorCallback.class, (context, view) -> {
-                if(!StringUtils.isEmpty(errorMsg)){
-                    TextView textView = view.findViewById(R.id.status_error_tv);
-                    textView.setText(errorMsg);
-                }
-
-                if(listener != null){
-                    view.findViewById(R.id.status_error_bt).setOnClickListener(listener);
-                }
-
-            });
-            statusLayout.showCallback(ErrorCallback.class);
+        if(statusController != null){
+            statusController.changeUiStatus(UiStatus.LOAD_ERROR);
         }
     }
 }

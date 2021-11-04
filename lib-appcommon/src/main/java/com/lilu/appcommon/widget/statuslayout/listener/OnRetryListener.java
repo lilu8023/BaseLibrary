@@ -1,0 +1,28 @@
+package com.lilu.appcommon.widget.statuslayout.listener;
+
+import android.view.View;
+
+import androidx.annotation.NonNull;
+
+import com.lilu.appcommon.widget.statuslayout.controller.IUiStatusController;
+
+
+/**
+ * Created by 段露 on 2018/11/06 19:34.
+ *
+ * @author 段露
+ * @version 1.0.0
+ * @class OnRetryListener
+ * @describe 重试监听器.
+ */
+public interface OnRetryListener {
+
+    /**
+     * 重试.
+     *
+     * @param target     bind Object.
+     * @param controller 当前视图状态控制器.
+     * @param trigger    重试触发控件.
+     */
+    void onUiStatusRetry(@NonNull Object target, @NonNull IUiStatusController controller, @NonNull View trigger);
+}
