@@ -54,6 +54,8 @@ public abstract class BaseActivity extends AppCompatActivity{
      */
     private UiStatusController statusController;
 
+    protected View mContentView;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         //
@@ -76,11 +78,11 @@ public abstract class BaseActivity extends AppCompatActivity{
         initToolbar(tbBase);
 
         //将子类目标布局解析加载到baseFrameLayout中
-        View contentView = View.inflate(this, getContentView(), null);
-        if(contentView != null){
+        mContentView = View.inflate(this, getContentView(), null);
+        if(mContentView != null){
             //将实际内容加载到内容布局中
             FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT);
-            flBase.addView(contentView,params);
+            flBase.addView(mContentView,params);
 
             statusController = UiStatusController.get().bind(flBase);
         }
@@ -140,6 +142,10 @@ public abstract class BaseActivity extends AppCompatActivity{
         }
     }
 
+    protected void setTitle(String title){
+        TextView titleTv = findViewById(R.id.tb_title_tv);
+        titleTv.setText(title);
+    }
     /**
      * 是否显示actionBar
      * 默认是显示的

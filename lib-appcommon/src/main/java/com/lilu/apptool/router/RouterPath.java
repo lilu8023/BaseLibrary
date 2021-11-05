@@ -9,6 +9,12 @@ package com.lilu.apptool.router;
 public class RouterPath {
 
     /**
+     * 基础模块路由
+     * @see com.lilu.appcommon.webview.activity.WebViewActivity
+     */
+    public static final String ACTIVITY_WEB = "/base/activity_web";
+
+    /**
      * 首页模块路由
      */
     public static final String ACTIVITY_MAIN = "/main/activity_main";

@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import com.google.gson.GsonBuilder
 import com.lilu.apptool.gson.DeserializeActionFactory
 import com.lilu.apptool.gson.NonNullFieldFactory
+import com.lilu.apptool.http.RetrofitHelper
 import com.lilu.apptool.http.exception.ApiException
 import com.lilu.apptool.http.subsciber.CommonSubscriber
 import com.lilu.apptool.livedata.CustomLiveData
@@ -91,7 +92,8 @@ class MainModel : ViewModel() {
                 .build()
 
         //创建网络请求接口
-        val mainApi = retrofit.create(MainApiService::class.java)
+//        val mainApi = retrofit.create(MainApiService::class.java)
+        val mainApi = RetrofitHelper.getInstance().create(MainApiService::class.java)
 
         //对发送请求进行封装
         val bannerResponse = mainApi.getTool()

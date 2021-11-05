@@ -8,6 +8,7 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.lilu.appcommon.activity.BaseActivity
 import com.lilu.appcommon.adapter.ViewPagerAdapter
 import com.lilu.appcommon.widget.jptabbar.JPTabBar
+import com.lilu.appcommon.widget.jptabbar.OnTabSelectListener
 import com.lilu.appcommon.widget.jptabbar.bean.TabBean
 import com.lilu.apptool.router.RouterPath
 import com.wan.main.R
@@ -129,6 +130,18 @@ class WanMainActivity : BaseActivity() {
             showBadge(1, "3")
         }
 
+        tab_wan.setTabListener(object : OnTabSelectListener{
+            override fun onTabSelect(index: Int) {
+
+                vpWan.currentItem = index
+
+            }
+
+            override fun onInterruptSelect(index: Int): Boolean {
+                return false
+            }
+
+        })
         showSuccess()
     }
 }

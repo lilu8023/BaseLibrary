@@ -1,5 +1,6 @@
 package com.wan.main.fragment
 
+import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.alibaba.android.arouter.launcher.ARouter
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.listener.OnItemClickListener
 import com.lilu.appcommon.fragment.BaseFragment
@@ -32,6 +34,7 @@ import com.wan.main.router.MainRouterPath
 import com.youth.banner.Banner
 import com.youth.banner.adapter.BannerImageAdapter
 import com.youth.banner.holder.BannerImageHolder
+import java.io.Serializable
 
 /**
  * Description:
@@ -170,7 +173,10 @@ class WanMainFragment : BaseFragment() {
                 Toast.makeText(activity, "点击了${toolList[position].name}", Toast.LENGTH_SHORT).show()
             } else {
                 //点击了更多，打开更多工具页
-                Router.getInstance().startActivity(MainRouterPath.ACTIVITY_TOOL)
+
+                ARouter.getInstance()
+                        .build(MainRouterPath.ACTIVITY_TOOL)
+                        .navigation()
             }
         }
     }
