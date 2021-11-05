@@ -13,6 +13,12 @@ ext{
     isSimpleApplication = true
     //玩Android主模块
     isAndroidApplication = false
+    //
+    isMineApplication = false
+    //
+    isSystemApplication = false
+    //
+    isQAApplication = false
 
     android = [
             //编译的SDK版本

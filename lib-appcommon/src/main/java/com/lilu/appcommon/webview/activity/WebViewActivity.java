@@ -2,17 +2,20 @@ package com.lilu.appcommon.webview.activity;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.SyncStateContract;
 import android.webkit.RenderProcessGoneDetail;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ProgressBar;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.lilu.appcommon.R;
 import com.lilu.appcommon.activity.BaseActivity;
+import com.lilu.appcommon.constant.Constants;
 import com.lilu.apptool.router.RouterPath;
 
 /**
@@ -25,9 +28,10 @@ import com.lilu.apptool.router.RouterPath;
 public class WebViewActivity extends BaseActivity {
 
 
-    @Autowired(name = "url")
+    @Autowired(name = Constants.WEB_URL)
     String url;
 
+    private ProgressBar web_pb;
     private WebView baseWeb;
     @Override
     protected int getContentView() {
@@ -36,12 +40,17 @@ public class WebViewActivity extends BaseActivity {
 
     @Override
     protected void init(Bundle savedInstanceState) {
+        web_pb = findViewById(R.id.web_pb);
         baseWeb = findViewById(R.id.wb_base);
 
+        showToolbar(false);
         initWebView();
         ARouter.getInstance().inject(this);
 
         baseWeb.loadUrl(url);
+
+        showSuccess();
+
     }
 
     private void initWebView(){
@@ -61,7 +70,8 @@ public class WebViewActivity extends BaseActivity {
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
 
-                showSuccess();
+                web_pb.setProgress(100);
+
 
             }
 
@@ -75,7 +85,6 @@ public class WebViewActivity extends BaseActivity {
             @Override
             public void onReceivedTitle(WebView view, String title) {
 
-                setTitle(title);
 
                 super.onReceivedTitle(view, title);
             }
@@ -83,6 +92,8 @@ public class WebViewActivity extends BaseActivity {
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
                 super.onProgressChanged(view, newProgress);
+
+                web_pb.setProgress(newProgress);
             }
         });
 

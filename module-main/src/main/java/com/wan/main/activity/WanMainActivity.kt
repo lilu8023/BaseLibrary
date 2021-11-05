@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
 import androidx.viewpager2.widget.ViewPager2
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.alibaba.android.arouter.launcher.ARouter
 import com.lilu.appcommon.activity.BaseActivity
 import com.lilu.appcommon.adapter.ViewPagerAdapter
 import com.lilu.appcommon.widget.jptabbar.JPTabBar
@@ -53,9 +54,12 @@ class WanMainActivity : BaseActivity() {
         vpList = ArrayList()
         vpList.apply {
             add(WanMainFragment())
-            add(WanMainFragment())
-            add(WanMainFragment())
-            add(WanMainFragment())
+            //添加问答 采用路由获取 并强转成fragment
+            add(ARouter.getInstance().build(RouterPath.FRAGMENT_SOLUTION).navigation() as Fragment)
+            //添加体系 采用路由获取 并强转成fragment
+            add(ARouter.getInstance().build(RouterPath.FRAGMENT_SYSTEM).navigation() as Fragment)
+            //添加个人中心  采用路由获取 并强转成fragment
+            add(ARouter.getInstance().build(RouterPath.FRAGMENT_MINE).navigation() as Fragment)
         }
 
         vpAdapter = ViewPagerAdapter(this@WanMainActivity, vpList)

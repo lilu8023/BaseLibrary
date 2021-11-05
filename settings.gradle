@@ -1,3 +1,6 @@
+include ':module-solution'
+include ':module-system'
+include ':module-mine'
 include ':module-main'
 include ':module-simple'
 include ':lib-appthird'

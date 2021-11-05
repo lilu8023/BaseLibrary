@@ -21,4 +21,21 @@ public class RouterPath {
 
     public static final String FRAGMENT_MAIN = "/main/fragment_main";
 
+
+    /**
+     * 个人中心模块路由
+     */
+    public static final String FRAGMENT_MINE = "/mine/fragment_mine";
+
+    /**
+     * 问答模块路由
+     */
+    public static final String FRAGMENT_SOLUTION = "/solution/fragment_solution";
+
+    /**
+     * 体系模块路由
+     */
+    public static final String FRAGMENT_SYSTEM = "/system/fragment_solution";
+
+
 }

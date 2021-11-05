@@ -55,4 +55,19 @@ dependencies {
     if(!rootProject.ext.isAndroidApplication){
         implementation project(path:':module-main')
     }
+
+    //是否加载项目个人中心模块
+    if(!rootProject.ext.isMineApplication){
+        implementation project(path:':module-mine')
+    }
+
+    //是否加载项目问答模块
+    if(!rootProject.ext.isSystemApplication){
+        implementation project(path:':module-solution')
+    }
+
+    //是否加载项目体系模块
+    if(!rootProject.ext.isQAApplication){
+        implementation project(path:':module-system')
+    }
 }
