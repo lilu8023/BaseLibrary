@@ -11,21 +11,22 @@
         android:layout_height="match_parent">
 
         <com.google.android.material.tabs.TabLayout
-            android:id="@+id/system_tb"
+            android:id="@+id/system_child_tab"
             android:layout_width="@dimen/dp_0"
-            android:layout_height="@dimen/dp_50"
+            android:layout_height="@dimen/dp_25"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:tabTextColor="@color/color_333333"/>
 
         <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/system_vp"
+            android:id="@+id/system_child_vp"
             android:layout_width="@dimen/dp_0"
             android:layout_height="@dimen/dp_0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/system_tb" />
+            app:layout_constraintTop_toBottomOf="@+id/system_child_tab"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

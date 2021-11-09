@@ -89,4 +89,6 @@ dependencies {
     //阿里路由注解
     kapt rootProject.ext.dependencies["arouter_compiler"]
 
+    implementation 'com.alibaba:fastjson:1.2.48'
+
 }

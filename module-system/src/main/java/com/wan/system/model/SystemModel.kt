@@ -7,6 +7,7 @@ import com.lilu.apptool.http.exception.ApiException
 import com.lilu.apptool.http.subsciber.CommonSubscriber
 import com.lilu.apptool.livedata.CustomLiveData
 import com.wan.system.apiservice.SystemApiService
+import com.wan.system.entity.HierarchyEntity
 import com.wan.system.entity.SystemEntity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -19,6 +20,8 @@ import io.reactivex.schedulers.Schedulers
 class SystemModel : ViewModel() {
 
     var treeList = CustomLiveData<MutableList<SystemEntity>>()
+
+    var hierarchy = CustomLiveData<HierarchyEntity>()
 
     fun getTree(){
 
@@ -35,5 +38,25 @@ class SystemModel : ViewModel() {
                         treeList.postSuccess(data)
                     }
                 })
+    }
+
+
+    fun getHierarchy(pageNum:Int,cid:Int){
+
+        RetrofitHelper.getInstance()
+                .create(SystemApiService::class.java)
+                .getHierarchy(pageNum,cid)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(object : CommonSubscriber<HierarchyEntity>(){
+                    override fun onError(e: ApiException?) {
+                    }
+
+                    override fun onSuccess(data: HierarchyEntity?) {
+
+                        hierarchy.postSuccess(data)
+                    }
+                })
+
     }
 }

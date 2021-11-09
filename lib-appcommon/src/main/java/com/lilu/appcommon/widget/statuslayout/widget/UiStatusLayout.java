@@ -4,6 +4,7 @@ import android.animation.LayoutTransition;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewStub;
 import android.widget.FrameLayout;
 
@@ -51,6 +52,11 @@ public class UiStatusLayout extends FrameLayout implements IUiStatusController, 
 
         mContentUiView.setVisibility(View.GONE);
         cacheUiView(UiStatus.CONTENT, mContentUiView);
+
+        if(mContentUiView.getParent() != null){
+            ((ViewGroup)mContentUiView.getParent()).removeView(mContentUiView);
+        }
+
         super.addView(mContentUiView, 0);
 
         setLayoutTransition(new LayoutTransition());

@@ -1,7 +1,6 @@
 package com.wan.system.adapter
 
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.wan.system.fragment.NavigationFragment
 import com.wan.system.fragment.TreeFragment
@@ -18,11 +17,12 @@ class SystemAdapter(context:Fragment,val tabs:Array<String>) :FragmentStateAdapt
         return tabs.size
     }
 
+
     override fun createFragment(position: Int): Fragment {
         return when (position) {
-            0 -> TreeFragment()
+            0 -> NavigationFragment()
 
-            else ->  NavigationFragment()
+            else -> TreeFragment()
         }
     }
 }

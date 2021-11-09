@@ -10,9 +10,16 @@ public class RouterPath {
 
     /**
      * 基础模块路由
+     *
+     */
+    /**
+     * webview页面
+     * 页面需要的参数
+     * url 需要打开的网址
      * @see com.lilu.appcommon.webview.activity.WebViewActivity
      */
     public static final String ACTIVITY_WEB = "/base/activity_web";
+    public static final String WEB_URL = "url";
 
     /**
      * 首页模块路由

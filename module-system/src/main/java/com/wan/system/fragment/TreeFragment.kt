@@ -3,6 +3,7 @@ package com.wan.system.fragment
 import android.view.View
 import com.lilu.appcommon.fragment.BaseFragment
 import com.wan.system.R
+import com.wan.system.model.SystemModel
 
 /**
  * Description:
@@ -11,12 +12,16 @@ import com.wan.system.R
  */
 class TreeFragment :BaseFragment() {
     override fun onVisibleFirst() {
+        showSuccess()
     }
 
     override fun getRootView(): Int {
-        return R.layout.item_system
+        return R.layout.fragment_system
     }
 
     override fun init(rootView: View) {
+
+        get(SystemModel::class.java)
+
     }
 }

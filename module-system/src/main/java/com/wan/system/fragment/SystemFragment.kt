@@ -41,8 +41,12 @@ class SystemFragment : BaseFragment() {
 
         mAdapter = SystemAdapter(this,tabs)
 
+        viewBinding?.systemVp?.adapter = mAdapter
+
         viewBinding?.let {
-            TabLayoutMediator(it.systemTb,it.systemVp,true) { tab, position -> Logger.i("选中了${position}") }.attach()
+            TabLayoutMediator(it.systemTb,it.systemVp,true) { tab, position ->
+                tab.text = tabs[position]
+            }.attach()
         }
 
 
