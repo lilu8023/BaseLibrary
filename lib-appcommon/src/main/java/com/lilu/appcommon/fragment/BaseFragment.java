@@ -13,6 +13,9 @@ import androidx.fragment.app.Fragment;
 
 import com.lilu.appcommon.widget.statuslayout.UiStatusController;
 import com.lilu.appcommon.widget.statuslayout.annotation.UiStatus;
+import com.lilu.appcommon.widget.statuslayout.callback.Loading;
+import com.lilu.appcommon.widget.statuslayout.core.LoadService;
+import com.lilu.appcommon.widget.statuslayout.core.LoadSir;
 
 import java.util.List;
 
@@ -36,7 +39,7 @@ public abstract class BaseFragment extends Fragment implements IFragmentVisibili
 
     protected View rootView;
 
-    private UiStatusController statusController;
+    private LoadService statusController;
 
     @Nullable
     @Override
@@ -46,10 +49,10 @@ public abstract class BaseFragment extends Fragment implements IFragmentVisibili
             rootView = inflater.inflate(getRootView(),container,false);
         }
 
-        statusController = UiStatusController.get();
+        statusController = LoadSir.getDefault().register(rootView);
         init(rootView);
 
-        return statusController.bindFragment(rootView);
+        return statusController.getLoadLayout();
     }
 
     @Override
@@ -160,7 +163,7 @@ public abstract class BaseFragment extends Fragment implements IFragmentVisibili
      */
     public void showSuccess(){
         if(statusController != null){
-            statusController.changeUiStatus(UiStatus.CONTENT);
+            statusController.showSuccess();
         }
     }
 
@@ -170,7 +173,7 @@ public abstract class BaseFragment extends Fragment implements IFragmentVisibili
     public void showLoading(){
 
         if(statusController != null){
-            statusController.changeUiStatus(UiStatus.LOADING);
+            statusController.showCallback(Loading.class);
         }
     }
 
@@ -182,9 +185,9 @@ public abstract class BaseFragment extends Fragment implements IFragmentVisibili
     }
 
     public void showEmpty(String emptyMsg) {
-        if(statusController != null){
-            statusController.changeUiStatus(UiStatus.EMPTY);
-        }
+//        if(statusController != null){
+//            statusController.changeUiStatus(UiStatus.EMPTY);
+//        }
     }
 
     /**
@@ -200,8 +203,8 @@ public abstract class BaseFragment extends Fragment implements IFragmentVisibili
      * @param listener  错误点击事件
      */
     public void showError(String errorMsg, View.OnClickListener listener) {
-        if(statusController != null){
-            statusController.changeUiStatus(UiStatus.LOAD_ERROR);
-        }
+//        if(statusController != null){
+//            statusController.changeUiStatus(UiStatus.LOAD_ERROR);
+//        }
     }
 }

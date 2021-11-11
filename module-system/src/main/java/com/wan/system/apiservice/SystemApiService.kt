@@ -2,6 +2,7 @@ package com.wan.system.apiservice
 
 import com.lilu.apptool.http.entity.BaseEntity
 import com.wan.system.entity.HierarchyEntity
+import com.wan.system.entity.NavigationEntity
 import com.wan.system.entity.SystemEntity
 import io.reactivex.Observable
 import retrofit2.http.GET
@@ -21,4 +22,7 @@ interface SystemApiService {
     @GET("/article/list/{pageNum}/json")
     fun getHierarchy(@Path("pageNum")pageNum:Int,
                      @Query("cid")cid:Int):Observable<BaseEntity<HierarchyEntity>>
+
+    @GET("/navi/json")
+    fun getNavigation():Observable<BaseEntity<MutableList<NavigationEntity>>>
 }

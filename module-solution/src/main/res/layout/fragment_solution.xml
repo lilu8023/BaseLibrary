@@ -4,31 +4,59 @@
 
     <data>
 
+        <variable
+            name="click"
+            type="com.wan.solution.fragment.SolutionFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
+        <RelativeLayout
             android:id="@+id/solution_title_tv"
             android:layout_width="@dimen/dp_0"
             android:layout_height="@dimen/dp_50"
-            app:layout_constraintStart_toStartOf="parent"
+            android:background="@color/color_398DEF"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:gravity="center"
-            android:text="@string/module_name"
-            android:textSize="@dimen/sp_18"
-            android:textColor="@color/color_333333" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/solution_rv"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="center_vertical"
+                android:text="@string/solution_name"
+                android:textColor="@color/color_FFFFFF"
+                android:textSize="@dimen/sp_18" />
+
+            <ImageView
+                android:id="@+id/wan_notice_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="@dimen/dp_15"
+                android:onClick="@{click::onViewClick}"
+                android:src="@drawable/ic_action_notice" />
+        </RelativeLayout>
+
+        <com.scwang.smart.refresh.layout.SmartRefreshLayout
+            android:id="@+id/solution_srl"
             android:layout_width="@dimen/dp_0"
             android:layout_height="@dimen/dp_0"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/solution_title_tv"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/solution_title_tv">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/solution_rv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </com.scwang.smart.refresh.layout.SmartRefreshLayout>
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

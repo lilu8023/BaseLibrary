@@ -24,7 +24,9 @@ data class WanMainEntity(var curPage: Int,
     var link:String,
     var niceDate:String,
     var superChapterName:String,
-    var title:String)
+    var title:String,
+    var type:Int,
+    var desc:String)
 
 
 }

@@ -1,8 +1,9 @@
 package com.wan.main.adapter
 
-import androidx.core.content.ContextCompat
+import android.view.View
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseDataBindingHolder
+import com.lilu.apptool.utils.StringUtils
 import com.wan.main.R
 import com.wan.main.databinding.ItemWanBinding
 import com.wan.main.entity.WanMainEntity
@@ -16,10 +17,14 @@ class WanMainAdapter(data:MutableList<WanMainEntity.WanMainChild>) : BaseQuickAd
 
     override fun convert(holder: BaseDataBindingHolder<ItemWanBinding>, item: WanMainEntity.WanMainChild) {
         holder.dataBinding?.let {
-            it.tvItemWan.apply {
-                setTextColor(ContextCompat.getColor(context,R.color.color_1EAD36))
-                text = item.title
+            it.article = item
+            if(StringUtils.isEmpty(item.desc)){
+                it.itemWanDesTv.visibility = View.GONE
+            }else{
+                it.itemWanDesTv.visibility = View.VISIBLE
+                it.itemWanDesTv.text = StringUtils.getHtmlString(item.desc)
             }
+
         }
     }
 

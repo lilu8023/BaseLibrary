@@ -1,6 +1,8 @@
 package com.lilu.apptool.utils;
 
 import android.content.res.Resources;
+import android.os.Build;
+import android.text.Html;
 
 import androidx.annotation.ArrayRes;
 import androidx.annotation.Nullable;
@@ -257,5 +259,13 @@ public class StringUtils {
             }
         }
         return text;
+    }
+
+    public static CharSequence getHtmlString(String html){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
+            return Html.fromHtml(html,Html.FROM_HTML_MODE_LEGACY);
+        }else{
+            return Html.fromHtml(html);
+        }
     }
 }

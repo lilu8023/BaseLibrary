@@ -72,6 +72,7 @@ class SystemChildActivity :BaseActivity() {
             viewBinding?.let {
 
                 it.systemChildVp.adapter = mAdapter
+                it.systemChildVp.offscreenPageLimit = mFragments?.size!!
                 TabLayoutMediator(it.systemChildTab,it.systemChildVp,true) { tab, position ->
                     tab.text = tabList?.get(position)?.name
                 }.attach()

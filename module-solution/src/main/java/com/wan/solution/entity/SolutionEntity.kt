@@ -14,7 +14,12 @@ data class SolutionEntity(var curPage: Int,
                           var datas: MutableList<SolutionChild>) {
 
     data class SolutionChild(var title: String,
-                             var link:String) {
+                             var link: String,
+                             var author: String,
+                             var superChapterName: String,
+                             var chapterName: String,
+                             var desc: String,
+                             var niceDate: String)
 
-    }
+
 }
