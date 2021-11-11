@@ -10,22 +10,42 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/system_tb"
+        <RelativeLayout
+            android:id="@+id/system_ll"
             android:layout_width="@dimen/dp_0"
             android:layout_height="@dimen/dp_50"
+
+            android:background="@color/color_398DEF"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:tabTextColor="@color/color_333333"/>
+            app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/system_vp"
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/system_tb"
+                android:layout_width="@dimen/dp_150"
+                android:layout_height="match_parent"
+                app:tabIndicatorColor="#00000000"
+                android:layout_centerHorizontal="true"
+                app:tabTextColor="@color/color_333333"
+                app:tabSelectedTextColor="@color/color_FFFFFF" />
+
+        </RelativeLayout>
+
+
+        <com.wan.system.fragment.NestedScrollableHost
             android:layout_width="@dimen/dp_0"
             android:layout_height="@dimen/dp_0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/system_tb" />
+            app:layout_constraintTop_toBottomOf="@+id/system_ll">
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/system_vp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </com.wan.system.fragment.NestedScrollableHost>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

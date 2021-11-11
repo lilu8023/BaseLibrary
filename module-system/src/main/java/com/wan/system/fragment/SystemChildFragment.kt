@@ -39,7 +39,6 @@ class SystemChildFragment : BaseFragment() {
 
 
     override fun onVisibleFirst() {
-        Logger.i("firstVisible")
         showLoading()
         vm.getHierarchy(0,systemId)
     }

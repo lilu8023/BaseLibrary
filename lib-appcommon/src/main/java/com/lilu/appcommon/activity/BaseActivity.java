@@ -140,6 +140,9 @@ public abstract class BaseActivity extends AppCompatActivity{
         if(getSupportActionBar() != null){
             getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
+        toolbar.setNavigationOnClickListener(v -> {
+            finish();
+        });
     }
 
     protected void setTitle(String title){

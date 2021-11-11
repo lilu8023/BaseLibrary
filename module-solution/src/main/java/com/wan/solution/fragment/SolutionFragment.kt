@@ -40,7 +40,7 @@ class SolutionFragment : BaseFragment() {
     }
 
     override fun onVisibleFirst() {
-
+        showLoading()
         vm.getSolution(pageNum)
 
     }

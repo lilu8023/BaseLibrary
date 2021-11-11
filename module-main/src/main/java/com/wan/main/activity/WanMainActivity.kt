@@ -131,7 +131,6 @@ class WanMainActivity : BaseActivity() {
 
             initFromAttribute()
             setupWithViewPager(vpWan)
-            showBadge(1, "3")
         }
 
         tab_wan.setTabListener(object : OnTabSelectListener{

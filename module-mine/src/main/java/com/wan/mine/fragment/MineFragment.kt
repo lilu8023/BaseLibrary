@@ -17,8 +17,8 @@ class MineFragment :BaseFragment(){
 
 
     override fun onVisibleFirst() {
-        Logger.i("个人中心首次加载")
 
+        Logger.i("个人中心首次加载")
         showSuccess()
     }
 

@@ -3,7 +3,8 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/color_BBBBBB">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/item_system_bg">
 
     <TextView
         android:id="@+id/item_system_child_tv"
@@ -12,5 +13,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:text="二级分类"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -25,6 +25,7 @@ class TreeFragment :BaseFragment() {
 
     private var mList:MutableList<NavigationEntity> = ArrayList()
     override fun onVisibleFirst() {
+        showLoading()
         vm.getNavigation()
     }
 
